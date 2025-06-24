@@ -2,7 +2,7 @@
 title: Test
 description: 
 published: false
-date: 2025-06-24T15:34:57.417Z
+date: 2025-06-24T15:38:47.318Z
 tags: 
 editor: code
 dateCreated: 2025-06-10T16:49:18.023Z
@@ -45,3 +45,37 @@ If you find any information that might not be accurate, the terminology used is 
     <p>This content is not yet available. Stay tuned!</p>
   </div>
 </div>
+
+<script>
+    // Wait for everything to load
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('coming-soon-modal');
+      const closeBtn = modal.querySelector('.modal-close');
+
+      function openModal() {
+        modal.setAttribute('aria-hidden', 'false');
+      }
+      function closeModal() {
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      // Close behaviors
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', e => {
+        if (e.target === modal) closeModal();
+      });
+
+      // Find all .card elements...
+      document.querySelectorAll('.card').forEach(card => {
+        // …but only those with no href or an empty href
+        const href = card.getAttribute('href');
+        if (!href) {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', e => {
+            e.preventDefault();
+            openModal();
+          });
+        }
+      });
+    });
+  </script>
